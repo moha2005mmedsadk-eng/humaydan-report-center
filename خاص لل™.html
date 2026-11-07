@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071b2b">
+<meta name="description" content="حميدان™ - أداة إعداد وصياغة بلاغات تيليجرام">
+<title>حميدان™ | مركز البلاغات</title>
+<style>
+:root{--bg:#061521;--panel:#102638;--field:#081a28;--line:#24516a;--text:#eef8ff;--muted:#9db5c5;--accent:#13b8c8;--accent2:#3878e8;--soft:#19384b;--danger:#e63966}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:28px 14px 40px;background:radial-gradient(ellipse at 50% 0%,#123c53 0,#071a29 46%,#030c14 100%);color:var(--text);font-family:Tahoma,Arial,sans-serif}
+.wrap{max-width:650px;margin:0 auto}.panel{background:linear-gradient(155deg,rgba(19,48,68,.97),rgba(9,24,38,.98));border:1px solid #27617b;border-radius:30px;padding:30px 28px 25px;box-shadow:0 18px 65px #0009,0 0 32px #0b8aa522}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px}.brand{font-size:27px;font-weight:700;letter-spacing:.2px}.tools{display:flex;gap:9px;align-items:center}.tool{border:1px solid var(--line);background:#0a2030;color:var(--text);border-radius:13px;padding:9px 12px;font-size:15px;cursor:pointer}
+label{display:block;color:#b9ccd8;margin:18px 0 10px;font-size:16px}input,textarea{width:100%;border:1px solid #2c5267;background:var(--field);border-radius:20px;padding:16px 18px;color:var(--text);font:16px Tahoma,Arial;outline:none;direction:auto}input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px #13b8c822}textarea{height:170px;resize:vertical;line-height:1.7}
+.primary{width:100%;border:0;border-radius:20px;padding:19px 14px;margin-top:18px;background:linear-gradient(100deg,var(--accent2),var(--accent));color:white;font: bold 20px Tahoma,Arial;cursor:pointer;box-shadow:0 8px 22px #087eaa33}.primary:hover{filter:brightness(1.08)}
+.add{margin-top:16px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.secondary{border:0;border-radius:18px;background:var(--soft);color:var(--text);padding:17px 10px;font:17px Tahoma,Arial;cursor:pointer}.secondary:hover,.tool:hover{filter:brightness(1.2)}
+.note{text-align:center;color:var(--muted);font-size:14px;margin:17px 0 22px}.counter{text-align:center;color:#c6d8e3;font-size:17px;margin-bottom:12px}.count{display:inline-block;background:var(--danger);color:white;border-radius:50%;min-width:34px;padding:5px 9px;font-weight:bold;margin-right:8px}.bar{height:9px;background:#294253;border-radius:20px;overflow:hidden}.bar span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width .3s}
+.foot{display:flex;justify-content:space-between;gap:12px;margin-top:28px;color:#c0d2dc;font-size:15px}.foot a{color:inherit;text-decoration:none}.modal{display:none;position:fixed;inset:0;background:#000b;z-index:5;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.dialog{width:min(520px,100%);max-height:85vh;overflow:auto;background:#102638;border:1px solid #34718c;border-radius:22px;padding:22px;box-shadow:0 20px 70px #000b}.dialog h3{margin:0 0 15px}.template{display:block;width:100%;text-align:right;margin:9px 0;padding:14px;border:1px solid #31576b;background:#0a1d2b;color:var(--text);border-radius:13px;font:16px Tahoma;cursor:pointer}.close{float:left;background:none;border:0;color:white;font-size:24px;cursor:pointer}.preview{white-space:pre-wrap;background:#071a28;border:1px solid #31576b;border-radius:14px;padding:16px;line-height:1.8;max-height:55vh;overflow:auto}
+@media(max-width:520px){body{padding:18px 10px 28px}.panel{padding:24px 18px;border-radius:25px}.brand{font-size:23px}.grid{gap:10px}.secondary{font-size:15px;padding:16px 7px}.foot{font-size:13px}}
+</style>
+</head>
+<body>
+<div class="wrap"><main class="panel">
+  <header class="top">
+    <div class="brand" id="brand">حميدان™</div>
+    <div class="tools">
+      <button class="tool" id="themeBtn" title="تغيير الألوان">🎨</button>
+      <button class="tool" id="langBtn">🇺🇸 English</button>
+    </div>
+  </header>
+
+  <label for="email" id="emailLabel">بريد الدعم</label>
+  <input id="email" type="email" value="abuse@telegram.org" placeholder="abuse@telegram.org" dir="ltr">
+
+  <label for="subject" id="subjectLabel">الموضوع</label>
+  <input id="subject" type="text">
+
+  <label for="message" id="messageLabel">نص البلاغ</label>
+  <textarea id="message"></textarea>
+
+  <button class="primary" id="sendBtn">إرسال البلاغ</button>
+  <button class="primary add" id="addonsBtn">⚡ الإضافات</button>
+
+  <div class="grid">
+    <button class="secondary" id="copyBtn">📋 نسخ البلاغ</button>
+    <button class="secondary" id="previewBtn">👁 معاينة</button>
+    <button class="secondary" id="anotherBtn">استخدام نص آخر</button>
+    <button class="secondary" id="resetBtn">تصفير العداد</button>
+  </div>
+  <div class="note" id="savedNote">تم حفظ المسودة على هذا الجهاز</div>
+  <div class="counter"><span id="counterLabel">عدد البلاغات المرسلة:</span> <span class="count" id="count">0</span></div>
+  <div class="bar"><span id="progress"></span></div>
+  <footer class="foot"><span>© حميدان™</span><a href="mailto:">تواصل مع المطور</a></footer>
+</main></div>
+
+<div class="modal" id="addonsModal"><div class="dialog">
+<button class="close" data-close="addonsModal">×</button><h3 id="addonsTitle">الإضافات والقوالب الجاهزة</h3>
+<button class="template" data-kind="child">🚸 استغلال أو إساءة للأطفال</button>
+<button class="template" data-kind="terror">⚠️ محتوى إرهابي أو تحريض على العنف</button>
+<button class="template" data-kind="drugs">🚫 ترويج وبيع المخدرات</button>
+<button class="template" data-kind="fraud">💳 احتيال أو نصب</button>
+<button class="template" data-kind="spam">📨 إزعاج أو رسائل مزعجة</button>
+<button class="template" data-kind="custom">📝 بلاغ عام</button>
+</div></div>
+
+<div class="modal" id="previewModal"><div class="dialog">
+<button class="close" data-close="previewModal">×</button><h3 id="previewTitle">معاينة البلاغ</h3><div class="preview" id="previewContent"></div>
+</div></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const fields=['email','subject','message'];
+const templates={
+child:{s:'Report: Child Safety Violation',m:'Hello Telegram Abuse Team,\\n\\nI am reporting content that appears to involve the exploitation, abuse, or endangerment of a minor. Please review the linked account, channel, and messages urgently and take appropriate action under Telegram policies and applicable law.\\n\\nLinks and evidence:\\n[Insert channel/account link]\\n[Insert message links]\\n\\nThank you.'},
+terror:{s:'Report: Terrorist Content or Incitement to Violence',m:'Hello Telegram Abuse Team,\\n\\nI am reporting content that appears to promote terrorism, recruit for a terrorist organization, or incite violence. Please review the material and take appropriate action.\\n\\nLinks and evidence:\\n[Insert channel/account link]\\n[Insert message links]\\n\\nThank you.'},
+drugs:{s:'Report: Illegal Drug Trafficking',m:'Hello Telegram Abuse Team,\\n\\nI am reporting accounts or channels that appear to advertise, sell, or facilitate the distribution of illegal drugs. Please review the following links and take action if they violate Telegram policies or applicable law.\\n\\nLinks and evidence:\\n[Insert channel/account links]\\n[Insert message links]\\n\\nThank you.'},
+fraud:{s:'Report: Fraud or Scam Activity',m:'Hello Telegram Abuse Team,\\n\\nI am reporting suspected fraudulent activity, scams, or attempts to steal users’ money or personal information. Please investigate the following links.\\n\\nLinks and evidence:\\n[Insert links]\\n\\nThank you.'},
+spam:{s:'Report: Spam and Unsolicited Messages',m:'Hello Telegram Abuse Team,\\n\\nI am reporting repeated unsolicited messages or spam activity. Please review the account and the evidence below.\\n\\nLinks and evidence:\\n[Insert account and message links]\\n\\nThank you.'},
+custom:{s:'Report: Policy Violation',m:'Hello Telegram Abuse Team,\\n\\nI would like to report content that may violate Telegram’s Terms of Service or community policies. Please review the details below.\\n\\nDescription:\\n[Describe the violation factually]\\n\\nLinks and evidence:\\n[Insert channel/account and message links]\\n\\nThank you.'}
+};
+let sent=Number(localStorage.getItem('humaydan_count')||0), lang='ar', theme=0;
+$('count').textContent=sent; $('progress').style.width=Math.min(sent*5,100)+'%';
+function save(){fields.forEach(id=>localStorage.setItem('humaydan_'+id,$(id).value))}
+fields.forEach(id=>{let v=localStorage.getItem('humaydan_'+id);if(v!==null && id!=='email')$(id).value=v;$(id).addEventListener('input',save)});
+function openModal(id){$(id).classList.add('show')}function closeModal(id){$(id).classList.remove('show')}
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>closeModal(b.dataset.close));
+$('addonsBtn').onclick=()=>openModal('addonsModal');
+document.querySelectorAll('[data-kind]').forEach(b=>b.onclick=()=>{let t=templates[b.dataset.kind];$('subject').value=t.s;$('message').value=t.m;save();closeModal('addonsModal')});
+$('copyBtn').onclick=async()=>{let txt='To: '+$('email').value+'\\nSubject: '+$('subject').value+'\\n\\n'+$('message').value;try{await navigator.clipboard.writeText(txt);alert(lang==='ar'?'تم نسخ البلاغ':'Report copied')}catch(e){$('message').select();document.execCommand('copy');alert(lang==='ar'?'تم النسخ':'Copied')}};
+$('previewBtn').onclick=()=>{$('previewContent').textContent='إلى: '+$('email').value+'\\nالموضوع: '+$('subject').value+'\\n\\n'+$('message').value;openModal('previewModal')};
+$('sendBtn').onclick=()=>{let to=$('email').value.trim(),sub=$('subject').value.trim(),body=$('message').value.trim();if(!to||!sub||!body){alert(lang==='ar'?'أكمل البريد والموضوع ونص البلاغ أولاً':'Fill in the email, subject and report first');return}let url='mailto:'+encodeURIComponent(to)+'?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(body);window.location.href=url;sent++;localStorage.setItem('humaydan_count',sent);$('count').textContent=sent;$('progress').style.width=Math.min(sent*5,100)+'%';};
+$('resetBtn').onclick=()=>{if(confirm(lang==='ar'?'تأكيد تصفير عداد البلاغات؟':'Reset report counter?')){sent=0;localStorage.setItem('humaydan_count','0');$('count').textContent='0';$('progress').style.width='0%'}};
+$('anotherBtn').onclick=()=>{if(confirm(lang==='ar'?'استبدال النص الحالي بقالب بلاغ عام؟':'Replace current text with a general report template?')){$('subject').value=templates.custom.s;$('message').value=templates.custom.m;save()}};
+$('themeBtn').onclick=()=>{theme=(theme+1)%3;let palettes=[['#061521','#102638','#13b8c8','#3878e8','#19384b'],['#17132b','#282044','#b58cff','#7654d6','#383052'],['#14231b','#20392b','#75c995','#368c66','#2d4938']];let p=palettes[theme];document.documentElement.style.setProperty('--bg',p[0]);document.documentElement.style.setProperty('--panel',p[1]);document.documentElement.style.setProperty('--accent',p[2]);document.documentElement.style.setProperty('--accent2',p[3]);document.documentElement.style.setProperty('--soft',p[4]);document.body.style.background='radial-gradient(ellipse at 50% 0%,'+p[1]+' 0,#071a29 55%,#030c14 100%)'};
+$('langBtn').onclick=()=>{lang=lang==='ar'?'en':'ar';let en=lang==='en';document.documentElement.lang=en?'en':'ar';document.documentElement.dir=en?'ltr':'rtl';$('langBtn').textContent=en?'🇮🇶 العربية':'🇺🇸 English';$('emailLabel').textContent=en?'Support email':'بريد الدعم';$('subjectLabel').textContent=en?'Subject':'الموضوع';$('messageLabel').textContent=en?'Report text':'نص البلاغ';$('sendBtn').textContent=en?'Send report':'إرسال البلاغ';$('addonsBtn').textContent=en?'⚡ Add-ons':'⚡ الإضافات';$('copyBtn').textContent=en?'📋 Copy report':'📋 نسخ البلاغ';$('previewBtn').textContent=en?'👁 Preview':'👁 معاينة';$('anotherBtn').textContent=en?'Use another text':'استخدام نص آخر';$('resetBtn').textContent=en?'Reset counter':'تصفير العداد';$('savedNote').textContent=en?'Draft saved on this device':'تم حفظ المسودة على هذا الجهاز';$('counterLabel').textContent=en?'Reports sent count:':'عدد البلاغات المرسلة:';$('addonsTitle').textContent=en?'Add-ons and templates':'الإضافات والقوالب الجاهزة';$('previewTitle').textContent=en?'Report preview':'معاينة البلاغ';};
+</script>
+</body></html>
